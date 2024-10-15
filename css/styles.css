@@ -53,7 +53,7 @@ p{
   }
 
 
-#choroplethmap, #areachart, #stackedbar, #linechart, #heatmap {
+#choroplethmap, #areachart, #stackedbar, #linechart, #heatmap, #areabar {
     width: 100%;
 }
 

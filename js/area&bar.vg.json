@@ -1,0 +1,219 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "background": "#feebe2",
+    "spacing": 130,
+    "params": [
+      {
+        "name": "year_selection",
+        "bind": {
+          "input": "select",
+          "options": ["2007-08", "2011-12", "2014-15", "2017-18", "2022"],
+          "name": "Year Selection"
+        },
+        "value": "2022"
+      },
+      {
+        "name": "Condition_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "No Selected Chronic Conditions",
+            "1 Chronic Condition",
+            "2 Chronic Conditions",
+            "1 or More Chronic Conditions",
+            "2 or More Chronic Conditions",
+            "3 or More Chronic Conditions"
+          ],
+          "labels": [
+            "Show All",
+            "No Chronic Conditions",
+            "1 Chronic Condition",
+            "2 Chronic Conditions",
+            "1 or More Chronic Conditions",
+            "2 or More Chronic Conditions",
+            "3 or More Chronic Conditions"
+          ],
+          "name": "Condition Selection"
+        },
+        "value": null
+      }
+    ],
+    "hconcat": [
+      
+      {
+        "description": "Chronic conditions in Australia",
+        "width": "container",
+        "height": 300,
+        "data": {
+          "url": "https://raw.githubusercontent.com/Nitya68/a2/main/data/no_lt_states.csv",
+          "format": {
+            "type": "csv"
+          }
+        },
+        "transform": [
+          {
+            "filter": "datum.State == 'Australia'"
+          },
+          {
+            "fold": [
+              "No Selected Chronic Conditions",
+              "1 Chronic Condition",
+              "2 Chronic Conditions",
+              "1 or More Chronic Conditions",
+              "2 or More Chronic Conditions",
+              "3 or More Chronic Conditions"
+            ],
+            "as": ["Conditions", "Total"]
+          },
+          {
+            "filter": "Condition_selection === null || datum['Conditions'] === Condition_selection"
+          }
+        ],
+        "mark": "area",
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          "y": {
+            "aggregate": "sum",
+            "field": "Total",
+            "stack": "zero",
+            "title": "Estimate ('000) people"
+          },
+          "color": {
+            "field": "Conditions",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "No Selected Chronic Conditions",
+                "1 Chronic Condition",
+                "2 Chronic Conditions",
+                "1 or More Chronic Conditions",
+                "2 or More Chronic Conditions",
+                "3 or More Chronic Conditions"
+              ],
+              "range": [
+                "#a6cee3",
+                "#ffeda0",
+                "#feb24c",
+                "#f768a1",
+                "#c51b8a",
+                "#7a0177"
+              ]
+            },
+            "title": "Number of Conditions"
+          },
+          
+          
+          "tooltip": [
+            {
+              "field": "Year",
+              "type": "ordinal",
+              "title": "Year"
+            },
+            {
+              "field": "Conditions",
+              "type": "nominal",
+              "title": "Number of Conditions"
+            },
+            {
+              "field": "Total",
+              "type": "quantitative",
+              "title": "Total Persons ('000)"
+            }
+          ]
+        }
+      },
+      {
+        "description": "Chronic Conditions by State",
+        "width": "container",
+        "height": 300,
+        "data": {
+          "url": "https://raw.githubusercontent.com/Nitya68/a2/main/data/no_lt_states.csv",
+          "format": {
+            "type": "csv"
+          }
+        },
+        "transform": [
+          {
+            "filter": "datum.Year == year_selection"
+          },
+          {
+            "fold": [
+              "No Selected Chronic Conditions",
+              "1 Chronic Condition",
+              "2 Chronic Conditions",
+              "1 or More Chronic Conditions",
+              "2 or More Chronic Conditions",
+              "3 or More Chronic Conditions"
+            ],
+            "as": ["Chronic Condition Type", "Percentage"]
+          },
+          {
+            "filter": "Condition_selection === null || datum['Chronic Condition Type'] === Condition_selection"
+          },
+          {
+            "filter": "datum.State != 'Australia'"
+          }
+        ],
+        "mark": "bar",
+        "encoding": {
+          "x": {
+            "field": "State",
+            "type": "ordinal",
+            "axis": {
+              "title": "State"
+            }
+          },
+          "y": {
+            "field": "Percentage",
+            "type": "quantitative",
+            "axis": {
+              "title": "Percentage"
+            }
+          },
+          "color": {
+            "field": "Chronic Condition Type",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "No Selected Chronic Conditions",
+                "1 Chronic Condition",
+                "2 Chronic Conditions",
+                "1 or More Chronic Conditions",
+                "2 or More Chronic Conditions",
+                "3 or More Chronic Conditions"
+              ],
+              "range": [
+                "#a6cee3",
+                "#ffeda0",
+                "#feb24c",
+                "#f768a1",
+                "#c51b8a",
+                "#7a0177"
+              ]
+            },
+            "legend": {
+                "orient": "top"
+              }
+          },
+        
+          "tooltip": [
+            {
+              "field": "Chronic Condition Type",
+              "type": "nominal"
+            },
+            {
+              "field": "Percentage",
+              "type": "quantitative",
+              "title": "Percentage of population"
+            }
+          ]
+        }
+      }
+    ]
+  }
+  

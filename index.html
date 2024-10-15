@@ -74,29 +74,17 @@
     </div>
   </div>
   <!-- 2nd Row: Area Chart (Left), Stacked Bar Chart (Right) -->
+ 
+
   <div class="pure-g">
-    <div class="pure-u-1-2">
-      <div class="pure-u-1">
-        
-        <div id="areachart"></div> 
+    <div class="pure-u-1">
+        <div id="areabar"></div> 
       <script type="text/javascript">
-        var spec2 = "js/num_lt_areachart.vg.json";
-        vegaEmbed('#areachart', spec2).then(function(result) {
+        var spec6 = "js/area&bar.vg.json";
+        vegaEmbed('#areabar', spec6).then(function(result) {
           // Vega view instance
         }).catch(console.error);
       </script>
-      </div>
-    </div>
-    <div class="pure-u-1-2">
-      <div class="pure-u-1">
-        <div id="stackedbar"></div> 
-      <script type="text/javascript">
-        var spec3 = "js/num_lt_states_stackbar.vg.json";
-        vegaEmbed('#stackedbar', spec3).then(function(result) {
-          // Vega view instance
-        }).catch(console.error);
-      </script>
-      </div>
     </div>
   </div>
 
@@ -192,7 +180,9 @@
     <div class="pure-u-1">
         <p class="meta">
             Author: Nitya Varagam <br>
-            Source: https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/latest-release 
+            Source: https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/latest-release , <br>
+                    https://www.who.int/data/gho/data/indicators/indicator-details/GHO/current-health-expenditure-(che)-per-capita-in-us-dollar
+
         </p>
     </div>
 </div>

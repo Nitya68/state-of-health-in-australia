@@ -32,3 +32,12 @@ var vg_5= "js/health_risks_states_heatmap.vg.json"
 vegaEmbed("#heatmap", vg_5).then(function(result ) {
 
 }).catch(console.error);
+
+// area chart and stacked bar
+// heat map
+var vg_6= "js/area&bar.vg.json"
+
+vegaEmbed("#areabar", vg_6).then(function(result ) {
+
+}).catch(console.error);
+
