@@ -1,0 +1,74 @@
+.pure-g{
+	display:flex;
+    flex-wrap:wrap;
+
+	justify-content: space-evenly;
+	 /* border: 2px solid black; Sets border width, style, and color */
+	width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.pure-u-1{
+	/* border: 2px solid red;  Sets border width, style, and color */
+	text-align: center;
+}
+
+html,body {
+	background-color:#feebe2 ;
+
+	width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+
+.heading {
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    font-size: 25px;
+    text-align: center;
+
+  }
+
+#image{
+    align-items: start;
+}
+
+#image img {
+    width: 150px; 
+    height: auto; /* maintain the aspect ratio */
+    object-fit: contain; /* ensures the entire image fits without being cropped */
+}
+
+p{
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+  }
+
+
+#choroplethmap, #areachart, #stackedbar, #linechart, #heatmap {
+    width: 100%;
+}
+
+.title{
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal; 
+}
+
+.meta{
+    font-family: "Nunito", sans-serif;
+    font-size: 12px;
+    font-weight: 350;
+    font-style: normal;
+    text-align: start;
+
+}

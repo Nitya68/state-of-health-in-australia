@@ -1,0 +1,113 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Proportion of People by Health Risk and State",
+    "background":"#feebe2",
+    "width": "container",
+    "height":300,
+    "data": {
+      "url": "https://raw.githubusercontent.com/Nitya68/a2/main/data/risk_factor_states.csv"
+    },
+    "params": [
+        {
+          "name": "Category_selection",
+          "bind": {
+            "input": "select",
+            "options":[
+              null,
+              "Australian Adult Alcohol Guideline 2020",
+              "Body Mass Index",
+              "Daily consumption of fruit and vegetables",
+              "Psychological distress",
+              "Smoker Status",
+              "2014 physical activity guidelines— physical activity excluding workplace activity"
+            ],
+            "labels": [
+              "Show All",
+              "Australian Adult Alcohol Guideline 2020",
+              "Body Mass Index",
+              "Daily consumption of fruit and vegetables",
+              "Psychological distress",
+              "Smoker Status",
+              "2014 physical activity guidelines— excluding workplace activity"
+            ],
+            "name": "Category Selection"
+          }
+        }
+      ],
+      "transform": [
+        {
+          "filter":"Category_selection == null || datum.Category == Category_selection"
+        }
+      ],
+    "mark": "rect",
+    "encoding": {
+      "x": { 
+        "field": "State",
+        "type": "nominal",
+        "title": ""
+      },
+      "y": { 
+        "field": "Sub-category",
+        "type": "nominal",
+        "title": "",
+        "sort": {
+          "field": "Category",  
+          "order": "ascending"
+        },
+        "axis": {
+          "labelFontSize": 12,
+          "labelAngle": 0,
+          "labelLimit": 0, 
+          "labelSeparation": 10,
+          "orient":"right"
+        }
+      },
+      "color": {
+        "field": "Category",
+        "type": "nominal",
+        "title": "Category",
+        "scale": {
+          "domain": [
+              "Australian Adult Alcohol Guideline 2020",
+              "Body Mass Index",
+              "Daily consumption of fruit and vegetables",
+              "Psychological distress",
+              "Smoker Status",
+              "2014 physical activity guidelines— physical activity excluding workplace activity"
+            ],
+          "range": [
+            "#7fc97f",
+            "#beaed4",
+            "#f0027f",
+            "#bf5b17",
+            "#ffff99",
+            "#386cb0",
+            "#f0027f",
+            "#bf5b17"
+          ]
+        }
+      },
+      "opacity": {
+        "bin": {
+          "binned": false,  
+          "step": 25        
+        },
+        "field": "Proportion of people(%)",
+        "type": "quantitative",
+        "title": "Proportion (%)"
+      },
+      "tooltip": [
+        {"field": "Category", "type": "nominal", "title": "Category"},
+        {"field": "Sub-category", "type": "nominal", "title": "Health Risk Factor"},
+        {"field": "State", "type": "nominal", "title": "State"},
+        {"field": "Proportion of people(%)", "type": "quantitative", "title": "Proportion (%)"}
+      ]
+    },
+    "config": {
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14
+      }
+    }
+  }
+  

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>State of Health in Australia</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+  
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="heading">
+    <h1>State of Health in Australia</h1>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-2-3">
+      <div class="pure-u-1">
+        <p>Australia boasts a world-class healthcare system,<br> recognized as the top-performing country in 2024<br>by the Commonwealth Fund. The nation’s strong<br>investment in health services ensures high-quality<br>care and excellent health outcomes.<br>As shown on the map, Australia consistently ranks<br> among countries with high health expenditure per capita,<br> reflecting its commitment to maintaining and improving<br>public health.</p>
+      </div>
+    </div>
+    <div class="pure-u-1-3">
+      <div class="pure-u-1">
+        <div id="image">
+            <img src="images\image.png">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    
+    <div class="pure-g">
+
+        <div class="pure-u-1">
+            <p class="title">Health Expenditure per Capita</p>
+        </div>
+    </div>
+  <!-- 1st Row: Choropleth Map in Full Width -->
+  <div class="pure-g">
+    <div class="pure-u-1">
+        
+        <div id="choroplethmap"></div> 
+        <script type="text/javascript">
+          var choropleth = "js/expenditure_choropleth.vg.json";
+          vegaEmbed('#choroplethmap', choropleth).then(function(result) {
+            // Vega view instance
+          }).catch(console.error);
+        </script>
+    </div>
+  </div>
+  
+  <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p class="title">Chronic conditions in Australia</p>
+      </div>
+    </div>
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p class="title">Chronic conditions by State</p>
+      </div>
+    </div>
+  </div>
+  <!-- 2nd Row: Area Chart (Left), Stacked Bar Chart (Right) -->
+  <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        
+        <div id="areachart"></div> 
+      <script type="text/javascript">
+        var spec2 = "js/num_lt_areachart.vg.json";
+        vegaEmbed('#areachart', spec2).then(function(result) {
+          // Vega view instance
+        }).catch(console.error);
+      </script>
+      </div>
+    </div>
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <div id="stackedbar"></div> 
+      <script type="text/javascript">
+        var spec3 = "js/num_lt_states_stackbar.vg.json";
+        vegaEmbed('#stackedbar', spec3).then(function(result) {
+          // Vega view instance
+        }).catch(console.error);
+      </script>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3rd Row: Placeholder for Text (Left & Right) -->
+  <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p>This section will discuss findings from the National Health Survey (NHS). <br>There is a clear upward trend in the prevalence of chronic<br>conditions in Australia, particularly in the "1 chronic<br>condition" and "2 or more chronic conditions" categories.<br>Conversely, the proportion of individuals with "No selected<br>chronic condition" has steadily declined, indicating fewer<br>Australians are free from chronic health issues. </p>
+
+      </div>
+    </div>
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p>This trend suggests a growing burden of chronic conditions,<br>likely associated with an aging population or lifestyle<br>changes. The percentage of people experiencing 1 or more<br>chronic conditions has risen compared to previous<br>surveys. In 2022, around half the population in<br>most states had no chronic conditions, with<br>Tasmania, South Australia, and Queensland showing<br>the highest rates of multiple conditions.</p>
+
+    </div>
+  </div>
+
+  <!-- 4th Row: Line Chart (Left), Placeholder for Text (Right) -->
+
+  <div class="pure-g">
+
+    <div class="pure-u-1">
+        <p class="title">Long Term Chronic Conditions across States</p>
+    </div>
+</div>
+
+  <div class="pure-g">
+    <div class="pure-u-1">
+        <div id="linechart"></div> 
+      <script type="text/javascript">
+        var spec4 = "js/selected_lt_cond_linechart.vg.json";
+        vegaEmbed('#linechart', spec4).then(function(result) {
+          // Vega view instance
+        }).catch(console.error);
+      </script>
+    </div>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p>The total number of people experiencing selected long-term<br>health conditions—including arthritis, asthma, back problems,<br>cancer, COPD, diabetes mellitus, hay fever, heart<br>disease, hypertension, kidney disease, mental conditions,<br>and osteoporosis—has increased across all states. Hay<br>fever has also seen an uptick in all regions.<br>Notably, comparing the 2022 survey results to those</p>
+
+      </div>
+    </div>
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p>from 2017-18 reveals a significant rise in the<br>number of individuals suffering from mental and<br>behavioral conditions. This trend indicates a growing<br>awareness, increased reporting, or a potential real<br>increase in mental health issues across many states.</p>
+
+    </div>
+  </div>
+
+  
+
+  <!-- 5th Row: Placeholder for Text (Left), Heatmap (Right) -->
+  <div class="pure-g">
+
+    <div class="pure-u-1">
+        <p class="title">Proportion of people by Health Risks across States</p>
+    </div>
+</div>
+
+  <div class="pure-g">
+    <div class="pure-u-1">
+        <div id="heatmap"></div> 
+      <script type="text/javascript">
+        var spec5 = "js/health_risks_states_heatmap.vg.json";
+        vegaEmbed('#heatmap', spec5).then(function(result) {
+          // Vega view instance
+        }).catch(console.error);
+      </script>
+    </div>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p>The heat map shows a consistent pattern in<br>the distribution of health risks and behaviors<br>across all Australian states. There are no<br>stark differences in the proportions, indicating<br>that these health-related trends are fairly<br>uniform nationwide. One key observation is that<br>physical activity guidelines are not being met<br>by a significant portion of the population in<br>all states, with medium to darker shades<br>indicating low adherence. Alcohol consumption,<br>particularly exceeding the recommended guidelines<br>and heavy drinking, shows a moderate but<br>consistent presence across states.</p>
+
+      </div>
+    </div>
+    <div class="pure-u-1-2">
+      <div class="pure-u-1">
+        <p>In terms of BMI, overweight and obesity<br>rates are relatively high, as indicated by<br>darker shades, reflecting a widespread issue<br>across the country. Additionally, the low<br>fruit and vegetable consumption is evident<br>with consistently darker shades, showing that<br>many people in each state are not meeting<br>daily nutritional recommendations. The category<br>for psychological distress shows moderate levels,<br>with only slight variations between states.<br>Interestingly, the smoker status shows a darker<br>shade for "never smoked", indicating a higher<br>percentage of people in most states who have<br>never smoked.</p>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="pure-g">
+
+    <div class="pure-u-1">
+        <p class="meta">
+            Author: Nitya Varagam <br>
+            Source: https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/latest-release 
+        </p>
+    </div>
+</div>
+</body>
+</html>

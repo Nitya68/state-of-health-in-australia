@@ -1,0 +1,123 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Selected Long-Term Chronic Conditions",
+    "background":"#feebe2",
+    "repeat": ["ACT", "NT", "NSW", "VIC", "WA", "SA", "QLD", "TAS"],
+    "columns": 2,
+    "spacing": 130,
+    "params": [
+      {
+        "name": "Condition_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Arthritis",
+            "Back problems (dorsopathies)",
+            "Hay fever and allergic rhinitis",
+            "Mental and behavioural conditions",
+            "Other Selected conditions",
+            "Total persons, all ages"
+          ],
+          "labels": [
+            "Show All",
+            "Arthritis",
+            "Back problems (dorsopathies)",
+            "Hay fever and allergic rhinitis",
+            "Mental and behavioural conditions",
+            "Other Selected conditions",
+            "Total persons, all ages"
+          ],
+          
+          "name": "Condition Selection"
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "Condition_selection == null || datum.Condition == Condition_selection"
+      }
+    ],
+    "spec": {
+      "width": 300,
+      "height": 180,
+      "data": {
+      "url": "https://raw.githubusercontent.com/Nitya68/a2/main/data/Selected_lt_states_wide.csv"},
+      "layer": [
+        {
+          "mark": "line",
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": "Year"
+            },
+            "y": {
+              "field": {"repeat": "repeat"},
+              "type": "quantitative",
+              "title": "Estimate ('000)"
+            },
+            "color": {
+              "field": "Condition",
+              "type": "nominal",
+              "title": "Condition",
+              "scale": {
+                "domain": [
+                  "Arthritis",
+                  "Back problems (dorsopathies)",
+                  "Hay fever and allergic rhinitis",
+                  "Mental and behavioural conditions",
+                  "Other Selected conditions",
+                  "Total persons, all ages"
+                ],
+                "range": [
+                  "#1f77b4",  
+                  "#ff7f0e",  
+                  "#fdc086", 
+                  "#f0027f",  
+                  "#9467bd",  
+                  "#e41a1c"   
+                ]
+              },
+              "legend": {
+                "orient": "top"
+              }
+            },
+            "tooltip": [
+              {"field": "Year", "type": "ordinal", "title": "Year"},
+              {"field": "Condition", "type": "nominal", "title": "Condition"},
+              {"field": {"repeat": "repeat"}, "type": "quantitative", "title": "Estimate ('000)"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "ACT": "Australian Capital Territory",
+                "NSW": "New South Wales",
+                "VIC": "Victoria",
+                "QLD": "Queensland",
+                "NT": "Northern Territory",
+                "SA": "South Australia",
+                "WA": "West Australia",
+                "TAS": "Tasmania"
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "baseline": "bottom",
+            "x": "width",
+            "y": 0
+          },
+          "encoding": {
+            "text": {"field": {"repeat": "repeat"}}
+          }
+        }
+      ]
+    },
+    "config": {}
+  }
+  

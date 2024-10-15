@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background":"#feebe2",
+  "description":"Chronic conditions in Australia",
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Nitya68/a2/main/data/no_lt_states.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.State == 'Australia'"
+    },
+    {
+      "fold": [
+        "No Selected Chronic Conditions",
+        "1 Chronic Condition",
+        "2 Chronic Conditions",
+        "1 or More Chronic Conditions",  
+        "2 or More Chronic Conditions" ,
+        "3 or More Chronic Conditions"  
+      ],
+      "as": ["Conditions", "Total"]
+    }
+  ],
+  "params": [
+    {
+      "name":"condition_highlight",
+      "select":{"type":"point", "fields":["Conditions"]},
+      "bind":"legend"
+    }
+  ],
+  "mark": "area",
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year"
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "Total",
+      "stack": "zero",
+      "title": "Estimate ('000) people"
+    },
+    "color": {
+      "field": "Conditions",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+         "No Selected Chronic Conditions",
+        "1 Chronic Condition",
+        "2 Chronic Conditions",
+        "1 or More Chronic Conditions",  
+        "2 or More Chronic Conditions" ,
+        "3 or More Chronic Conditions" 
+        ],
+        "range": [
+          "#a6cee3",
+          "#ffeda0",
+          "#feb24c",
+          "#f768a1",
+          "#c51b8a",
+          "#7a0177"
+        ]
+      },
+      "title": "Number of Conditions"
+    },
+    "opacity":{
+      "condition":{"param":"condition_highlight", "value":0.8},
+      "value": 0.2
+    },
+    "tooltip": [
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {"field": "Conditions", "type": "nominal", "title": "Number of Conditions"},
+      {"field": "Total", "type": "quantitative", "title": "Total Persons ('000)"}
+    ]
+  }
+}
